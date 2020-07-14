@@ -1,0 +1,26 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div id="app">
+  <input type="text" v-model='user1'>
+  <input type="text" v-model='password1'>
+  <button @click='getName()'>Click</button>
+</div>
+
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: () => ({
+      userName: 'Metric',
+      userPassword: '12345',
+      user1: '',
+      password1: ''
+    }),
+    methods: {
+      getName(){
+        if(this.userName == this.user1 && this.userPassword == this.password1) {
+          document.location.href = "Page2.html"
+        }
+      }
+    }
+  })
+</script>

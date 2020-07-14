@@ -1,0 +1,49 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div id="app">
+  <input type="text" v-model='user'>
+  <button @click='addUser()'>Click</button>
+
+  <div ref='contacts'>
+
+  </div>
+  <div ref='edites'></div>
+</div>
+
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: () => ({
+      user: '',
+      userDesc: '',
+      editor: ''
+    }),
+    methods: {
+      addUser(){
+        let rast = document.createElement("p")
+        rast.innerHTML = `${this.user}  `
+        this.$refs.contacts.appendChild(rast)
+        let button = document.createElement("button")
+        let button2 = document.createElement("button")
+        button.textContent = 'edit'
+        button2.textContent = 'remove'
+        rast.appendChild(button)
+        rast.appendChild(button2)
+
+        let edit = us =>{
+        rast.remove()
+        button2.remove()
+        button.remove()
+        let editor1 = document.querySelector("input")
+        editor1.value = us.textContent
+        
+        }
+        button.onclick = () => edit(rast)
+        button2.onclick = () => rast.remove()
+        // button.addEventListener('click', this.edit(rast))
+        this.user = ''
+        },
+
+      }
+  })
+</script>
