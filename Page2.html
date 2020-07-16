@@ -4,8 +4,8 @@
   <input type="text" v-model='user'>
   <button @click='addUser()'>Click</button>
 
-  <div ref='contacts'>
-
+  <div ref='contacts' v-for="user in users">
+    <p>{{user.name}} <button @click = "removeUser(user.name)">Удалить</button></p>
   </div>
   <div ref='edites'></div>
 </div>
@@ -15,34 +15,48 @@
     el: '#app',
     data: () => ({
       user: '',
-      userDesc: '',
-      editor: ''
+      // userDesc: '',
+      users: [
+        {
+          name: 'Metric'
+        }
+      ]
     }),
     methods: {
+      removeUser(user){
+        let index = this.users.findIndex(e => e.name == user)
+        this.users.splice(index, 1)
+      },
       addUser(){
-        let rast = document.createElement("p")
-        rast.innerHTML = `${this.user}  `
-        this.$refs.contacts.appendChild(rast)
-        let button = document.createElement("button")
-        let button2 = document.createElement("button")
-        button.textContent = 'edit'
-        button2.textContent = 'remove'
-        rast.appendChild(button)
-        rast.appendChild(button2)
-
-        let edit = us =>{
-        rast.remove()
-        button2.remove()
-        button.remove()
-        let editor1 = document.querySelector("input")
-        editor1.value = us.textContent
-        
-        }
-        button.onclick = () => edit(rast)
-        button2.onclick = () => rast.remove()
-        // button.addEventListener('click', this.edit(rast))
+        this.users.push({
+          name: this.user
+        })
         this.user = ''
-        },
+      }
+      // addUser(){
+      //   let rast = document.createElement("p")
+      //   rast.innerHTML = `${this.user}  `
+      //   this.$refs.contacts.appendChild(rast)
+      //   let button = document.createElement("button")
+      //   let button2 = document.createElement("button")
+      //   button.textContent = 'edit'
+      //   button2.textContent = 'remove'
+      //   rast.appendChild(button)
+      //   rast.appendChild(button2)
+
+      //   let edit = us =>{
+      //   rast.remove()
+      //   button2.remove()
+      //   button.remove()
+      //   let editor1 = document.querySelector("input")
+      //   editor1.value = us.textContent
+        
+      //   }
+      //   button.onclick = () => edit(rast)
+      //   button2.onclick = () => rast.remove()
+      //   // button.addEventListener('click', this.edit(rast))
+      //   this.user = ''
+      //   },
 
       }
   })
